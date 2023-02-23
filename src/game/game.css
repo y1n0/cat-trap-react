@@ -1,0 +1,96 @@
+
+
+.box {
+    --square-size: 40px;
+    width: 640px;
+    height: 400px;
+    background-color: hsla(54, 100%, 90%, 0.5);
+    display: grid;
+    grid-template-columns: repeat(var(--size), var(--square-size));
+    grid-template-rows: repeat(var(--size), var(--square-size));
+    place-content: center;
+    place-items: center;
+    gap: 0px 6px;
+    padding: 50px 20px;
+    overflow: hidden;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-template-rows: subgrid;
+    grid-column: 1 / calc(var(--size) + 1);
+}
+
+.row:nth-child(2n) {
+    transform: translateX(calc(var(--square-size) / 2 + 2px));
+}
+
+.square {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+    width: var(--square-size);
+    height: var(--square-size);
+    background-color: rgba(175, 238, 238, 0.5);
+    border: 2px solid transparent;
+    border-radius: 100%;
+    /* clip-path: polygon(0 25%, 50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%); */
+    user-select: none;
+}
+
+.square:hover {
+    border-color: hsla(180, 50%, 81%, 0.5);
+    cursor: pointer;
+}
+
+.square:active {
+    border-color: hsla(327, 100%, 50%, 0.747);
+}
+
+.square.off {
+    background-color: hsl(300, 24.3%, 50%);
+}
+
+
+.square.cat {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.square.cat::after {
+    content: "●";
+    position: absolute;
+    color: crimson;
+    font-size: 48px;
+    line-height: 0;
+    top: 15px;
+}
+
+.square.cat.escape::after {
+    transition: .5s ease-in;
+    transform: translate(calc(var(--escape-x, 0) * 150px), calc(var(--escape-y, 0) * 150px));
+}
+
+.announcements {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.announcements > .msg {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+
+    font-size: 24px;
+    text-align: center;
+}
+
+.announcements > .ctrl {
+    position: relative;
+    z-index: 1;
+}
